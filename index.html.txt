@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="tl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code: Red, Puso: Green | A Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@700;900&display=swap" rel="stylesheet">
+    <!--
+    Chosen Palette: Dark Mode with Energetic & Playful Accents (#F72585, #4CC9F0)
+    -->
+    <!--
+    Application Structure Plan: A single-page, long-form narrative structure was chosen to create an uninterrupted, immersive reading experience, similar to platforms like Wattpad or Medium. The primary user flow is linear scrolling. A sticky navigation bar with chapter links is included for non-linear access. This version adds Gemini API-powered features: "Character Insights" (tooltips) and "Alternate Ending" (modal) to enhance reader engagement and offer interactive exploration of the narrative.
+    -->
+    <!--
+    Visualization & Content Choices: The application presents the story's text and adds two Gemini-powered features.
+    - Report Info: Full Story Text -> Goal: Inform/Narrate -> Presentation Method: Formatted HTML text -> Interaction: Scrolling, Chapter Navigation -> Justification: The most direct way to present a narrative.
+    - Report Info: Character Descriptions -> Goal: Analyze/Inform -> Presentation Method: Gemini-generated text in a tooltip -> Interaction: Clicking a sparkle icon -> Justification: Adds a layer of character depth without disrupting the reading flow.
+    - Report Info: Story Premise -> Goal: Entertain/Explore -> Presentation Method: Gemini-generated text in a modal -> Interaction: Clicking a button -> Justification: Offers a "what if" scenario that engages the reader's imagination after the story's conclusion.
+    -->
+    <!--
+    CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            background-color: #121212;
+            color: #E0E0E0;
+            font-family: 'Lora', serif;
+        }
+        h1, h2, h3, .font-header {
+            font-family: 'Poppins', sans-serif;
+        }
+        .text-main-accent { color: #F72585; }
+        .text-secondary-accent { color: #4CC9F0; }
+        .bg-accent { background-color: #F72585; }
+        .border-accent { border-color: #F72585; }
+        .chapter-divider {
+            height: 2px;
+            background-image: linear-gradient(to right, transparent, #F72585, transparent);
+            border: 0;
+            margin: 4rem auto;
+        }
+        .prose {
+            font-size: 1.125rem;
+            line-height: 1.75;
+        }
+        .prose h3 {
+            font-size: 1.875rem;
+            font-weight: 900;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+        .prose p {
+            margin-bottom: 1.5rem;
+        }
+        .prose i {
+            color: #a5a5a5;
+        }
+        .gemini-trigger {
+            cursor: pointer;
+            display: inline-block;
+            transition: transform 0.2s;
+        }
+        .gemini-trigger:hover {
+            transform: scale(1.2);
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #F72585;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav id="navbar" class="sticky top-0 z-50 bg-black bg-opacity-80 backdrop-blur-sm shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <div class="text-2xl font-black text-white font-header">C<span class="text-main-accent">:</span>R</div>
+                <div class="hidden md:flex space-x-6 text-sm font-header">
+                    <a href="#kabanata1" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 1</a>
+                    <a href="#kabanata2" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 2</a>
+                    <a href="#kabanata3" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 3</a>
+                    <a href="#kabanata4" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 4</a>
+                    <a href="#kabanata5" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 5</a>
+                    <a href="#kabanata6" class="text-gray-300 hover:text-main-accent transition-colors">Kabanata 6</a>
+                    <a href="#epilogue" class="text-gray-300 hover:text-main-accent transition-colors">Epilogue</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="text-center py-20 md:py-32 px-4 bg-black">
+        <h1 class="text-4xl md:text-7xl font-black text-white leading-tight">Code: Red, <span class="text-main-accent">Puso: Green</span></h1>
+        <p class="mt-4 max-w-3xl mx-auto text-lg md:text-xl text-gray-400">"Sa bawat pag-type ng code, may isang pangalan siyang binubulong. Paano kung ang system error ng buhay mo ay siya ring system upgrade ng puso mo?"</p>
+    </header>
+
+    <main class="container mx-auto px-6 md:px-8 py-12">
+        <article class="prose prose-invert max-w-4xl mx-auto">
+
+            <section id="kabanata1">
+                <h3>Kabanata 1: Project: Sulyap</h3>
+                <p><i>Error 404: Feelings not found.</i> ‘Yan dapat ang status ng puso ko tuwing papasok sa office. Trabaho lang, walang personalan. As a junior web developer sa Valiente Corp, ang tanging language na dapat kong master ay Javascript, hindi love language.</p>
+                <p>Pero lahat ng firewall ko, nag-crash.</p>
+                <p>Lahat dahil sa kanya.</p>
+                <p>Siya si Leo Valiente <span class="gemini-trigger" data-character="Leo">✨</span>. Yes, <i>the</i> Valiente. Anak ng nag-iisang dragon sa kumpanyang ‘to, ang aming CEO. Kung sa programming, siya ‘yung perfect code na walang bugs. Tall, chinito, matikas, at may ngiti na kayang mag-reboot ng buong system mo. Habang ako? Ako si Elian, or Eli <span class="gemini-trigger" data-character="Eli">✨</span>. Isang hamak na employee na mas komportable sa oversized hoodie at pakikipag-usap sa computer kaysa sa tao. Medyo may pagka-soft boy, sabi ng best friend ko. Okay, fine, hindi medyo.</p>
+                <p>Araw-araw, may ritwal ako. Mula sa fortress of solitude ko (aka my cubicle), sisilipin ko siya. Ang tawag ko sa top-secret mission na ‘to: <i>Project: Sulyap</i>. Nakikita ko siya sa malayo, naglalakad sa hallway na parang pag-aari niya ang mundo—which, technically, totoo naman. Ang arogante pakinggan, pero sa kanya, it just works.</p>
+                <p>“Huy, natunaw na,” bulong ni Sasha, ang katabi kong graphic artist at self-proclaimed wingwoman ko.</p>
+                <p>“Gaga, hindi ah. Tinitingnan ko lang kung ‘yung design ng pinto, a-aesthetic sa feng shui ng hallway,” palusot ko, sabay type ng kung ano-ano sa keyboard.</p>
+                <p>“Asus. Feng shui daw. Baka ‘pag-ibig’ ang tinitingnan mo, hindi ‘pinto’.”</p>
+                <p>Hindi ko na lang siya pinansin. Itinutok ko ang atensyon ko sa screen, pero ang peripheral vision ko, traydor. Nakatutok pa rin sa direksyon niya.</p>
+                <p>Hanggang sa isang araw, sa gitna ng isang meeting sa conference room, nag-iba ang lahat. Habang busy ang lahat sa presentation, naligaw ang tingin ko, at gaya ng dati, sa kanya ito napunta. Pero this time, hindi siya nakatingin sa kung saan.</p>
+                <p>Nakatitig siya.</p>
+                <p>Sa akin.</p>
+                <p>Nag-freeze ang mundo ko. Parang nag-hang ang system ko. Nagtama ang mga mata namin mula sa magkabilang dulo ng mahabang lamesa. Walang kurap. Walang kibot. Para kaming nasa isang bubble at kami lang ang tao. Sa mga mata niya, walang judgment. May… curiosity? Interes?</p>
+                <p>At a split second before I looked away, my heart doing a marathon, he did something that completely short-circuited my brain.</p>
+                <p>He smiled. A small, almost secret smile. Just for me.</p>
+                <p><i>System reboot required.</i></p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="kabanata2">
+                <h3>Kabanata 2: Eye Contact is a Full Conversation</h3>
+                <p>Simula nung araw na ‘yon, naging laro na namin ang tinginan. Hindi na lang ako ang nag-iisang player sa <i>Project: Sulyap</i>. Two-player mode na kami.</p>
+                <p>Sa pantry, habang nagtitimpla ako ng kape, mararamdaman ko na lang na may nakatitig sa akin. Paglingon ko, nandoon siya sa isang sulok, kunwari’y nagbabasa sa phone niya, pero mahuhuli ko siyang nakangiti.</p>
+                <p>Sa elevator, kapag nagkakasabay kami, hindi siya nagsasalita. Pero sa reflection sa makintab na pinto, kitang-kita ko kung paano siya pasimpleng sumusulyap. At ako? Eto, nagpipigil ng kilig, feeling ko anytime sasabog ang puso ko na parang popcorn.</p>
+                <p>“Beh, level up na kayo,” sabi ni Sasha isang hapon. “From sulyap to titigan. Ano next? Holding hands while debugging?”</p>
+                <p>“Sira! Imposible ‘yon,” sabi ko, pero deep inside, <i>sana all.</i></p>
+                <p>Isang beses, pa-out na ako ng office nang bigla siyang sumulpot sa gilid ko. Hindi ko namalayan.</p>
+                <p>“Good work on the new user interface, Elian,” sabi niya.</p>
+                <p>Napatigil ako. Ang boses niya, mas malalim at mas malambing pala sa malapitan. Amoy niya, parang a combination of expensive perfume and pure confidence. <i>Lord, eto na ba ‘yun?</i></p>
+                <p>“Ah, T-thank you, Sir Leo,” nautal kong sagot. <i>Sir? Seriously, Eli? Ang formal mo, ghorl?</i></p>
+                <p>“Leo is fine,” sabi niya, at ‘yung ngiti niya, parang HD. “See you tomorrow.”</p>
+                <p>Tumango lang ako, hindi makapagsalita. Pagtalikod niya, napahawak ako sa dibdib ko. Ang bilis ng tibok. Parang gusto nang kumawala.</p>
+                <p>Hindi na ‘to basta-basta tinginan lang. May something. At pareho naming alam ‘yun.</p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="kabanata3">
+                <h3>Kabanata 3: Rooftop Confessions</h3>
+                <p>Friday. 6 PM. Oras na para mag-log out sa trabaho at mag-log in sa weekend. Pero imbes na umuwi, dinala ako ng mga paa ko sa rooftop garden ng building. Dito, tahimik. Dito, pwede akong huminga.</p>
+                <p>Habang pinapanood ko ang paglubog ng araw sa likod ng mga gusali, narinig ko ang pagbukas ng pinto.</p>
+                <p>Si Leo.</p>
+                <p>My heart did the thing again. <i>Dug-dug-dug-dug.</i></p>
+                <p>Naglakad siya palapit at tumabi sa akin, nakatingin din sa papalubog na araw. For a few minutes, tahimik lang kami. Isang komportableng katahimikan.</p>
+                <p>“Alam mo,” he started, breaking the silence. “I’ve been trying to find the right time to talk to you. Alone.”</p>
+                <p>Napalunok ako. “B-bakit po? May mali ba sa code ko?”</p>
+                <p>He chuckled. A warm, genuine sound. “Wala. Your codes are perfect.” Tumingin siya sa akin, at this time, his eyes were serious, intense. “It’s you.”</p>
+                <p>“A-ako?”</p>
+                <p>“Oo, ikaw.” Lumapit pa siya nang konti. “Eli, I don’t know how to say this without sounding crazy, pero… I think I’m falling for you.”</p>
+                <p>Napatanga ako. Loading… 10%… 45%… 78%… <i>Does not compute.</i></p>
+                <p>“Seryoso?” ‘Yun lang ang lumabas sa bibig ko.</p>
+                <p>“Seryosong-seryoso,” he said, his voice soft. “Mula sa unang beses na nakita kitang tumawa mag-isa sa harap ng computer mo, hanggang sa mga pasulyap-sulyap mo sa akin sa meeting. Lahat ‘yun, napansin ko. At lahat ‘yun, gusto ko.”</p>
+                <p>Hindi ako makapaniwala. Ang taong pinapangarap ko lang sa malayo, aamin sa akin? Parang eksena sa isang BL series na pinapanood ko.</p>
+                <p>“Hindi ko alam ang sasabihin ko,” I managed to whisper.</p>
+                <p>“You don’t have to say anything,” sabi niya. “Just… let me know if I have a chance. Kahit 1% lang.”</p>
+                <p>Tumingin ako sa mga mata niya. Nakita ko ang sincerity. Nakita ko ang pag-asa. At sa sandaling ‘yon, lahat ng takot at pag-aalinlangan ko, nawala.</p>
+                <p>Ngumiti ako. Isang totoong ngiti. “Hindi 1%,” sabi ko. “It’s a hundred.”</p>
+                <p>Ang ngiting sumilay sa mukha niya? Priceless. It was the most beautiful code I had ever seen.</p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="kabanata4">
+                <h3>Kabanata 4: Level 1 Unlocked: Jowa-reveal</h3>
+                <p>Our first date was a mix of everything I never thought I’d experience. Hindi sa isang fancy restaurant. Instead, dinala niya ako sa isang food park sa Marikina.</p>
+                <p>“Gusto ko makita kung anong itsura mo kapag kumakain ng isaw,” he joked.</p>
+                <p>“Excuse me, I look cute doing everything,” I retorted, trying to sound confident.</p>
+                <p>Naglakad kami, magkahawak-kamay. Ang kamay niya, malaki at mainit, perfect fit sa kamay ko. Nag-share kami sa isang bucket ng fries, nag-agawan sa huling piraso. Nagkwentuhan kami tungkol sa lahat—paboritong series, pangarap sa buhay, a-assemble na PC parts.</p>
+                <p>“So, you’re a secret geek,” sabi ko, natatawa.</p>
+                <p>“Only for you to know,” he winked.</p>
+                <p>Sa ilalim ng mga ilaw ng food park, sa gitna ng ingay at tawanan ng mga tao, pakiramdam ko kami lang. Sa bawat tingin niya, sa bawat ngiti, sa bawat paghawak niya sa kamay ko, nararamdaman kong totoo ‘to. Hindi na ‘to pangarap.</p>
+                <p>“Eli,” sabi niya habang pauwi na kami, nakasandal ang ulo ko sa balikat niya sa loob ng kotse niya.</p>
+                <p>“Hmm?”</p>
+                <p>“I’m so happy.”</p>
+                <p>“Ako rin,” sagot ko. “Sobra.”</p>
+                <p>‘Yun ang simula. Sinundan pa ng maraming dates. Manonood ng sine, maglalaro sa arcade, o minsan, tatambay lang sa apartment ko, mag-o-order ng pizza at mag-ma-marathon ng anime. Sa bawat araw na lumilipas, mas lalo kaming nahuhulog sa isa’t isa. Siya ang kalma sa magulo kong mundo. Ako ang pahinga sa pressure-filled na buhay niya.</p>
+                <p>We were perfect. Or so I thought.</p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="kabanata5">
+                <h3>Kabanata 5: The Final Boss</h3>
+                <p>Ang bubble namin, pinutok ng isang tawag.</p>
+                <p>“Dad wants to have dinner. With us,” sabi ni Leo sa telepono, bakas sa boses niya ang kaba.</p>
+                <p>Ang dinner. The legendary “meet-the-parents” stage. Pero sa kaso namin, ito ang “meet-the-final-boss” stage.</p>
+                <p>Ang Valiente mansion ay parang isang palasyo. Malamig. Malaki. Nakakatakot. At sa gitna ng lahat, ang hari—si Mr. Valiente Sr., ang CEO. Ang tingin niya sa akin mula ulo hanggang paa ay mas masakit pa sa kahit anong bug sa code.</p>
+                <p>“So, you’re the… employee,” sabi niya, the word “employee” dripping with venom.</p>
+                <p>“Good evening po, Sir,” sabi ko, nanginginig.</p>
+                <p>The dinner was hell. Tahimik. Tense. Ang tanging maririnig mo ay ang tunog ng mga kubyertos na tumatama sa plato.</p>
+                <p>Pagkatapos, sa library, hinarap kami ng ama ni Leo.</p>
+                <p>“Leo, what is the meaning of this?” tanong ng CEO, ang boses ay kalmado pero nakakakilabot. “Pinag-aral kita sa pinakamagagandang unibersidad, inihanda kita para pamunuan ang kumpanya. At ito ang isusukli mo sa akin? Isang… kahihiyan.”</p>
+                <p>“Dad, I love him,” matigas na sabi ni Leo, hawak nang mahigpit ang kamay ko.</p>
+                <p>“Love?” a cynical laugh escaped the CEO’s lips. “That’s not love. That’s a phase. A disgusting one. Hiwalayan mo siya. Now.”</p>
+                <p>“No.”</p>
+                <p>“What did you say?”</p>
+                <p>“I said no!” tumaas ang boses ni Leo. “Hindi ko siya hihiwalayan. Mahal ko si Eli.”</p>
+                <p>Tumingin sa akin ang CEO, ang mga mata’y parang yelo. “At ikaw,” he pointed at me. “Kung hindi mo siya lalayuan, sisiguraduhin kong hindi ka lang sa kumpanya ko mawawalan ng trabaho. Sisirain ko ang buhay mo.”</p>
+                <p>That was it. The declaration of war.</p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="kabanata6">
+                <h3>Kabanata 6: Sa Gitna ng Ulan</h3>
+                <p>Lumabas kami ng mansyon na parang binuhusan ng malamig na tubig. At sakto, bumuhos din ang malakas na ulan. Nanginginig ako, hindi dahil sa lamig, kundi dahil sa takot.</p>
+                <p>“Eli…”</p>
+                <p>“Leo, tama siya,” sabi ko, umiiyak na. “Siguro… siguro dapat na nating itigil ‘to.”</p>
+                <p>Hinarap niya ako, hinawakan ang magkabilang balikat ko. “No. Look at me. Don’t you dare say that.”</p>
+                <p>“Pero paano? Paano tayo lalaban? He’s your father. He’s powerful.”</p>
+                <p>“I don’t care!” sigaw niya sa gitna ng ulan. “Kaya kong talikuran ang lahat para sa’yo. Ang pera, ang kumpanya, lahat ‘yun basura lang kumpara sa’yo.”</p>
+                <p>Hinawakan niya ang mukha ko. “Ipaglalaban kita, Eli. Ipaglalaban natin ‘to. Pangako.”</p>
+                <p>Sa gitna ng ulan, sa gitna ng sakit at takot, niyakap niya ako nang mahigpit. At sa yakap na ‘yon, naniwala ako. Kakayanin namin. Basta’t magkasama kami.</p>
+            </section>
+
+            <hr class="chapter-divider">
+
+            <section id="epilogue">
+                <h3>Epilogue: Fatal Error</h3>
+                 <p>Dalawang buwan. Dalawang buwan na ang nakalipas simula nang araw na ‘yon. Nakatayo ako ngayon sa tabi ng bintana ng dati naming apartment. Hawak-hawak ko ang paborito niyang itim na hoodie. Amoy niya pa rin.</p>
+                 <p>Sabi ng pulis, isang truck daw na nawalan ng preno ang bumangga sa kotse niya sa SLEX. Dead on arrival. Pero alam ko, sa puso ko, hindi ‘yun aksidente.</p>
+                 <p>Tumingin ako sa reflection ko sa salamin ng bintana. At sa likod ko, nakita ko siya. Ang multo ng alaala niya. Nakangiti. ‘Yung ngiting nagpa-reboot ng system ko.</p>
+                 <p><i>“Ipaglalaban kita, Eli. Pangako.”</i></p>
+                 <p>Biglang tumulo ang mga luha ko. Isang patak. Dalawa. Hanggang sa hindi ko na mapigilan.</p>
+                 <p>“Sinungaling,” bulong ko sa hangin. “Iniwan mo ako.”</p>
+                 <p>Dahan-dahang naglaho ang reflection niya, gaya ng paglaho niya sa buhay ko. Naiwan akong mag-isa, yakap-yakap ang hoodie niya, sa gitna ng katahimikan.</p>
+                 <p>Sabi nila, every code has an end. Every program terminates. Siguro, ‘yung sa amin, natapos na. Pero ang pagmamahal ko para sa kanya? It’s an infinite loop. Walang katapusan.</p>
+                 <div class="text-center mt-12">
+                    <button id="alternateEndingBtn" class="bg-accent text-white font-header font-bold py-3 px-6 rounded-lg hover:bg-pink-600 transition-colors shadow-lg">✨ What If? Explore an Alternate Ending</button>
+                 </div>
+            </section>
+
+        </article>
+    </main>
+
+    <footer class="text-center py-10 mt-12 border-t border-gray-800">
+        <p class="text-gray-500 text-sm">A story by your creative AI assistant, enhanced with Gemini.</p>
+        <p class="text-gray-600 text-xs mt-2">All characters and events in this story are fictitious.</p>
+    </footer>
+
+    <!-- Modal for Alternate Ending -->
+    <div id="endingModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+        <div class="bg-[#1e1e1e] rounded-lg shadow-xl p-8 max-w-2xl w-11/12 max-h-[80vh] overflow-y-auto relative">
+            <button id="closeModalBtn" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl">&times;</button>
+            <h3 class="text-2xl font-bold text-white mb-4 font-header">An Alternate Path...</h3>
+            <div id="modalContent" class="prose prose-invert">
+                <div class="flex justify-center items-center h-48">
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip for Character Insights -->
+    <div id="characterTooltip" class="absolute z-50 hidden bg-gray-900 border border-accent text-white text-sm rounded-lg shadow-lg p-3 max-w-xs">
+        <div id="tooltipContent"></div>
+        <div class="loader-small hidden"></div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const alternateEndingBtn = document.getElementById('alternateEndingBtn');
+            const endingModal = document.getElementById('endingModal');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalContent = document.getElementById('modalContent');
+            const characterTriggers = document.querySelectorAll('.gemini-trigger');
+            const tooltip = document.getElementById('characterTooltip');
+            const tooltipContent = document.getElementById('tooltipContent');
+
+            const API_KEY = ""; // API key is handled by the environment
+
+            async function callGemini(prompt) {
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: prompt }]
+                            }]
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const data = await response.json();
+                    if (data.candidates && data.candidates.length > 0) {
+                        return data.candidates[0].content.parts[0].text;
+                    } else {
+                        return "I'm sorry, I couldn't generate a response right now.";
+                    }
+                } catch (error) {
+                    console.error("Gemini API call failed:", error);
+                    return "Error: Could not connect to the story engine.";
+                }
+            }
+
+            // Alternate Ending Logic
+            if (alternateEndingBtn) {
+                alternateEndingBtn.addEventListener('click', async () => {
+                    endingModal.classList.remove('hidden');
+                    modalContent.innerHTML = '<div class="flex justify-center items-center h-48"><div class="loader"></div></div>';
+                    
+                    const prompt = `Based on the tragic boys' love story "Code: Red, Puso: Green," where the developer Eli loses his love, Leo, in a car accident after they defy Leo's disapproving father, write a short, hopeful, and romantic alternate "what if" ending. Start from the night of the supposed accident. What if Leo never got into that car? What happens next? Keep the tone consistent with the original story, focusing on their love conquering the obstacles. Make it heartwarming.`;
+                    
+                    const newEnding = await callGemini(prompt);
+                    modalContent.innerHTML = `<p>${newEnding.replace(/\n/g, '</p><p>')}</p>`;
+                });
+            }
+
+            if (closeModalBtn) {
+                closeModalBtn.addEventListener('click', () => {
+                    endingModal.classList.add('hidden');
+                });
+            }
+
+            // Character Insights Logic
+            characterTriggers.forEach(trigger => {
+                trigger.addEventListener('mouseenter', async (e) => {
+                    const character = e.target.dataset.character;
+                    
+                    tooltipContent.innerHTML = '<div class="loader-small"></div>';
+                    
+                    const rect = e.target.getBoundingClientRect();
+                    tooltip.style.left = `${rect.left + window.scrollX}px`;
+                    tooltip.style.top = `${rect.bottom + window.scrollY + 5}px`;
+                    tooltip.classList.remove('hidden');
+
+                    let prompt = '';
+                    if (character === 'Eli') {
+                        prompt = `Based on this character description from a story: 'Ako si Elian, or Eli. Isang hamak na employee na mas komportable sa oversized hoodie at pakikipag-usap sa computer kaysa sa tao. Medyo may pagka-soft boy...'. Generate a short, insightful psychological profile or 'character analysis' of Eli. What are his likely fears, motivations, and inner conflicts? Keep it brief and in a conversational, bulleted-list tone.`;
+                    } else if (character === 'Leo') {
+                        prompt = `Based on this character description from a story: 'Siya si Leo Valiente. Kung sa programming, siya ‘yung perfect code na walang bugs. Tall, chinito, matikas, at may ngiti na kayang mag-reboot ng buong system mo.' He is also the son of a powerful CEO. Generate a short, insightful psychological profile or 'character analysis' of Leo. What are his likely motivations and inner conflicts, especially regarding his father and his love for Eli? Keep it brief and in a conversational, bulleted-list tone.`;
+                    }
+                    
+                    const insight = await callGemini(prompt);
+                    tooltipContent.innerHTML = insight.replace(/\n/g, '<br>');
+                });
+
+                trigger.addEventListener('mouseleave', () => {
+                    tooltip.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
